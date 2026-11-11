@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тихий час — кафе на Садовой</title>
+  <meta name="description" content="Кафе «Тихий час» на Садовой, 12: завтраки весь день, кофе и своя выпечка. Зал на 24 места.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238d4332'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #f3eee6;
+      --card: #faf7f2;
+      --ink: #1a1613;
+      --muted: #5c534c;
+      --line: #d5c9ba;
+      --terra: #8d4332;
+      --terra-dark: #6e3224;
+      --field: #fffdfb;
+      --serif: "Palatino Linotype", Palatino, "Times New Roman", serif;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      color-scheme: light;
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      width: min(68rem, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      margin: 0 0 1.25rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.4rem, 9vw, 6.4rem);
+      line-height: 0.92;
+    }
+
+    .lede {
+      max-width: 28rem;
+      margin: 1.5rem 0 0;
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      margin-top: 2rem;
+      padding: 0.75rem 1.35rem;
+      border: 0;
+      border-radius: 2px;
+      background: var(--terra);
+      color: #f7f3ec;
+      font: inherit;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover { background: var(--terra-dark); }
+
+    .button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+    }
+
+    section {
+      padding: 4.25rem 0;
+      scroll-margin-top: 1.25rem;
+    }
+
+    section + section { border-top: 1px solid var(--line); }
+
+    h2 {
+      margin: 0 0 1.5rem;
+      font-size: clamp(1.8rem, 3vw, 2.35rem);
+      line-height: 1.15;
+    }
+
+    .prose {
+      max-width: 40rem;
+    }
+
+    .prose p { margin: 0 0 1rem; }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.75rem 2rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .menu h3 {
+      margin: 0 0 1.1rem;
+      font-size: 1.45rem;
+    }
+
+    .dish {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+
+    .dish + .dish { margin-top: 0.9rem; }
+
+    .dish .name { max-width: 16rem; }
+
+    .leader {
+      flex: 1;
+      border-bottom: 1px dotted var(--line);
+      transform: translateY(-0.28em);
+    }
+
+    .price {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .shot {
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background: #e6d9c8;
+    }
+
+    .shot svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .cards h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+    }
+
+    .cards p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .facts {
+      max-width: 36rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .facts div {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0.35rem 1.25rem;
+    }
+
+    .facts div + div { margin-top: 0.85rem; }
+
+    .facts dt {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .facts dd { margin: 0; }
+
+    .facts a {
+      color: inherit;
+    }
+
+    .hint {
+      margin: 0;
+      max-width: 36rem;
+    }
+
+    .book-intro {
+      max-width: 36rem;
+      margin: -0.25rem 0 1.5rem;
+      color: var(--muted);
+    }
+
+    form, .thanks {
+      max-width: 38rem;
+      padding: 1.35rem;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.1rem;
+    }
+
+    .wide { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.92rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem 0.75rem;
+      border: 1px solid #cfc3b4;
+      border-radius: 2px;
+      background: var(--field);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 6.5rem;
+      resize: vertical;
+    }
+
+    .error {
+      min-height: 1.2rem;
+      margin: 0.3rem 0 0;
+      color: var(--terra-dark);
+      font-size: 0.88rem;
+    }
+
+    form .button { width: 100%; }
+
+    .thanks {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      line-height: 1.3;
+    }
+
+    .thanks p { margin: 0; }
+
+    .thanks .again {
+      margin-top: 0.75rem;
+      font-family: var(--sans);
+      font-size: 1.02rem;
+    }
+
+    footer {
+      padding: 1.75rem 0 2.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+    }
+
+    footer a { color: inherit; }
+
+    @media (max-width: 800px) {
+      .menu, .cards { grid-template-columns: 1fr; }
+      .hero { padding: 3rem 0 2.5rem; }
+      section { padding: 3rem 0; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(68rem, calc(100% - 1.5rem)); }
+      .fields { grid-template-columns: 1fr; }
+      .button { width: 100%; }
+      .facts div { grid-template-columns: 1fr; gap: 0.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kicker">Кафе на Садовой</p>
+      <h1>Тихий час</h1>
+      <p class="lede">Завтраки весь день, кофе и выпечка со своей кухни.</p>
+      <a class="button" href="#book">Забронировать стол</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 id="about-title">О кафе</h2>
+        <div class="prose">
+          <p>Мы на Садовой, 12, в двух шагах от парка. Зал на двадцать четыре места, у дальней стены окно в небольшой сад.</p>
+          <p>С утра печём булочки и пироги. Завтрак подаём и после полудня: омлет, сырники, кашу. Днём есть суп, салат и пара горячих блюд.</p>
+          <p>Если идёте компанией больше четырёх, оставьте заявку. Столы стоят свободно, но зал маленький, и место у окна разбирают раньше остального.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" aria-labelledby="menu-title">
+      <div class="wrap">
+        <h2 id="menu-title">Меню</h2>
+        <ul class="menu">
+          <li>
+            <h3>Завтраки</h3>
+            <div class="dish"><span class="name">Омлет с зеленью и тостом</span><span class="leader"></span><span class="price">390&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Сырники со сметаной</span><span class="leader"></span><span class="price">420&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Каша на молоке</span><span class="leader"></span><span class="price">280&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Яичница с беконом</span><span class="leader"></span><span class="price">450&nbsp;₽</span></div>
+          </li>
+          <li>
+            <h3>Основное</h3>
+            <div class="dish"><span class="name">Суп дня</span><span class="leader"></span><span class="price">340&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Тёплый салат с курицей</span><span class="leader"></span><span class="price">490&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Паста с томатами</span><span class="leader"></span><span class="price">520&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Сэндвич с индейкой</span><span class="leader"></span><span class="price">460&nbsp;₽</span></div>
+          </li>
+          <li>
+            <h3>Напитки</h3>
+            <div class="dish"><span class="name">Фильтр-кофе</span><span class="leader"></span><span class="price">180&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Капучино</span><span class="leader"></span><span class="price">240&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Чай в чайнике</span><span class="leader"></span><span class="price">220&nbsp;₽</span></div>
+            <div class="dish"><span class="name">Какао</span><span class="leader"></span><span class="price">230&nbsp;₽</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="place" aria-labelledby="place-title">
+      <div class="wrap">
+        <h2 id="place-title">В зале</h2>
+        <ul class="cards">
+          <li>
+            <div class="shot" aria-hidden="true">
+              <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="200" fill="#d9c6aa"/>
+                <rect x="86" y="36" width="148" height="112" fill="#f4ecdf" stroke="#5c382c" stroke-width="7"/>
+                <path d="M160 36v112M86 92h148" stroke="#5c382c" stroke-width="4"/>
+                <rect x="86" y="148" width="148" height="16" fill="#6d8a72"/>
+              </svg>
+            </div>
+            <h3>Зал</h3>
+            <p>Деревянные столы и свет из сада. В будни утром обычно свободно у окна.</p>
+          </li>
+          <li>
+            <div class="shot" aria-hidden="true">
+              <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="200" fill="#5c382c"/>
+                <circle cx="160" cy="104" r="58" fill="#c4a484"/>
+                <circle cx="160" cy="104" r="28" fill="#2c1b15"/>
+              </svg>
+            </div>
+            <h3>Кофе</h3>
+            <p>Фильтр и напитки на молоке. Зерно берём небольшими мешками и меняем, когда мешок кончается.</p>
+          </li>
+          <li>
+            <div class="shot" aria-hidden="true">
+              <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="200" fill="#ead7c4"/>
+                <ellipse cx="160" cy="122" rx="84" ry="34" fill="#c46a45"/>
+                <ellipse cx="160" cy="104" rx="74" ry="26" fill="#f0d2a8"/>
+                <ellipse cx="160" cy="96" rx="36" ry="12" fill="#8d4332"/>
+              </svg>
+            </div>
+            <h3>Выпечка</h3>
+            <p>Булочки и пироги с раннего утра. К десяти полка полная, к вечеру выбор меньше.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="visit" aria-labelledby="visit-title">
+      <div class="wrap">
+        <h2 id="visit-title">Как добраться</h2>
+        <dl class="facts">
+          <div>
+            <dt>Адрес</dt>
+            <dd>ул. Садовая, 12</dd>
+          </div>
+          <div>
+            <dt>Часы</dt>
+            <dd>пн–пт 8:00–21:00<br>сб–вс 9:00–22:00</dd>
+          </div>
+          <div>
+            <dt>Телефон</dt>
+            <dd><a href="tel:+79000000000">+7&nbsp;(900)&nbsp;000-00-00</a></dd>
+          </div>
+        </dl>
+        <p class="hint">5 минут от парка. Вход с Садовой, вывеска над дверью.</p>
+      </div>
+    </section>
+
+    <section id="book" aria-labelledby="book-title">
+      <div class="wrap">
+        <h2 id="book-title">Бронь стола</h2>
+        <p class="book-intro">Напишите, когда придёте. Мы перезвоним и подтвердим.</p>
+        <form id="reserve" novalidate>
+          <div class="fields">
+            <div class="wide">
+              <label for="name">Имя</label>
+              <input id="name" name="name" type="text" autocomplete="name" aria-describedby="name-error">
+              <p class="error" id="name-error"></p>
+            </div>
+            <div class="wide">
+              <label for="phone">Телефон</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-describedby="phone-error">
+              <p class="error" id="phone-error"></p>
+            </div>
+            <div>
+              <label for="date">Дата</label>
+              <input id="date" name="date" type="date" aria-describedby="date-error">
+              <p class="error" id="date-error"></p>
+            </div>
+            <div>
+              <label for="time">Время</label>
+              <input id="time" name="time" type="time" step="900" aria-describedby="time-error">
+              <p class="error" id="time-error"></p>
+            </div>
+            <div class="wide">
+              <label for="guests">Число гостей</label>
+              <select id="guests" name="guests" aria-describedby="guests-error">
+                <option value="">Сколько человек</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+              </select>
+              <p class="error" id="guests-error"></p>
+            </div>
+            <div class="wide">
+              <label for="comment">Комментарий</label>
+              <textarea id="comment" name="comment" placeholder="Окно, детский стул, день рождения"></textarea>
+            </div>
+          </div>
+          <button class="button" type="submit">Отправить заявку</button>
+        </form>
+        <div class="thanks" id="thanks" hidden>
+          <p>Заявка принята, мы перезвоним.</p>
+          <p class="again">Если нужно быстрее, позвоните: <a href="tel:+79000000000">+7&nbsp;(900)&nbsp;000-00-00</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>Тихий час</span>
+      <a href="tel:+79000000000">+7&nbsp;(900)&nbsp;000-00-00</a>
+      <span>пн–пт 8:00–21:00 · сб–вс 9:00–22:00</span>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#reserve");
+    const thanks = document.querySelector("#thanks");
+    const dateInput = document.querySelector("#date");
+
+    const today = new Date();
+    const pad = (n) => String(n).padStart(2, "0");
+    const todayISO = today.getFullYear() + "-" + pad(today.getMonth() + 1) + "-" + pad(today.getDate());
+    dateInput.min = todayISO;
+
+    function validPhone(value) {
+      const trimmed = value.trim();
+      if (!/^[+\d\s()\-–—]+$/.test(trimmed)) return false;
+      const digits = trimmed.replace(/\D/g, "");
+      if (digits.length === 11) return digits[0] === "7" || digits[0] === "8";
+      return digits.length === 10;
+    }
+
+    function withinHours(dateStr, timeStr) {
+      const day = new Date(dateStr + "T12:00:00").getDay();
+      const parts = timeStr.split(":").map(Number);
+      const minutes = parts[0] * 60 + parts[1];
+      const weekend = day === 0 || day === 6;
+      const open = weekend ? 9 * 60 : 8 * 60;
+      const close = weekend ? 22 * 60 : 21 * 60;
+      return minutes >= open && minutes < close;
+    }
+
+    function clearField(id) {
+      document.getElementById(id).removeAttribute("aria-invalid");
+      document.getElementById(id + "-error").textContent = "";
+    }
+
+    function fail(id, message, first) {
+      const field = document.getElementById(id);
+      field.setAttribute("aria-invalid", "true");
+      document.getElementById(id + "-error").textContent = message;
+      return first || field;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      ["name", "phone", "date", "time", "guests"].forEach(clearField);
+
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const date = form.date.value;
+      const time = form.time.value;
+      const guests = form.guests.value;
+      let first = null;
+
+      if (!name) first = fail("name", "Напишите, как к вам обращаться", first);
+      if (!phone) first = fail("phone", "Нужен телефон", first);
+      else if (!validPhone(phone)) first = fail("phone", "Проверьте номер. Подойдёт +7 900 000-00-00", first);
+      if (!date) first = fail("date", "Выберите дату", first);
+      else if (date < todayISO) first = fail("date", "Эта дата уже прошла", first);
+      if (!time) first = fail("time", "Выберите время", first);
+      else if (date && date >= todayISO && !withinHours(date, time)) {
+        first = fail("time", "В это время мы закрыты. Будни 8:00–21:00, выходные 9:00–22:00", first);
+      }
+      if (!guests) first = fail("guests", "Укажите число гостей", first);
+
+      if (first) {
+        first.focus();
+        return;
+      }
+
+      form.hidden = true;
+      thanks.hidden = false;
+    });
+  </script>
+</body>
+</html>
